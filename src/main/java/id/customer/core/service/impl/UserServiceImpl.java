@@ -312,7 +312,8 @@ public class UserServiceImpl implements UserService {
     if (getUser.getUsername() != null) {
       Date dateNow = new Date();
       Date dateExpired = new Date((dateNow).getTime() + jwtExpirationMs);
-
+      logger.info("cek password db "+getUser.getPassword());
+      logger.info("cek password from request "+encoder.encode(loginRequestDto.getPassword()));
       if (!encoder.matches(loginRequestDto.getPassword(), getUser.getPassword())){
         result.setSuccess(true);
         result.setCode(HttpStatus.BAD_REQUEST.value());
